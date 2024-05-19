@@ -992,7 +992,7 @@ import getBestWorkerScope, { Scope, spawnWorker, workerScopeHTML } from './worke
 		const resistanceSet = new Set([hashSlice($hash), privacy, mode, extension])
 		resistanceSet.delete(undefined)
 		const resistanceType = [...resistanceSet].join(':')
-		const fetchVisitorDataTimer = timer()
+		const fetchVisitorDataTimer = timer(0)
 
 		let status = ''
 		const secret = await cipher({

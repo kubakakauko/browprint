@@ -4,15 +4,29 @@ import { getWebGLRendererConfidence, compressWebGLRenderer } from '../trash'
 import { createTimer, queueEvent, getOS, getUserAgentPlatform, decryptUserAgent, computeWindowsRelease, JS_ENGINE, logTestResult, isUAPostReduction, performanceLogger, hashSlice, IS_WORKER_SCOPE, IS_BLINK, getReportedPlatform } from '../utils/helpers'
 import { HTMLNote } from '../utils/html'
 
+
+/**
+ * Represents the scope of a worker.
+ */
 export const enum Scope {
 	WORKER = 0,
 	WINDOW,
 }
 
+/**
+ * The type of the worker.
+ */
 export let WORKER_TYPE = ''
 export let WORKER_NAME = ''
 
 export async function spawnWorker() {
+	/**
+	 * Executes the provided function and returns its result. If an error occurs during the execution of the function,
+	 * `undefined` is returned.
+	 *
+	 * @param {Function} fn - The function to execute.
+	 * @return {any} The result of the function execution, or `undefined` if an error occurs.
+	 */
 	const ask = (fn) => {
 		try {
 			return fn()

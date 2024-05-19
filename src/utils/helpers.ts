@@ -1,9 +1,27 @@
 import { PlatformClassifier } from './types'
 
+/**
+ * Determines if the current scope is a worker scope.
+ *
+ * @remarks
+ * This helper function checks if the code is running in a worker scope by
+ * verifying if the `self` object does not have a `document` property but
+ * has a `WorkerGlobalScope` property.
+ *
+ * @returns A boolean value indicating if the current scope is a worker scope.
+ */
 // @ts-expect-error
 export const IS_WORKER_SCOPE = !self.document && self.WorkerGlobalScope
 
 // Detect Browser
+/**
+ * Retrieves the engine information.
+ *
+ * This function attempts to execute a specific operation and catches any error that occurs.
+ * It then returns the length of the error message concatenated with the length of a modified string representation of an array.
+ *
+ * @return {number} The engine information.
+ */
 function getEngine() {
 	const x = [].constructor
 	try {
@@ -14,23 +32,30 @@ function getEngine() {
 }
 
 const ENGINE_IDENTIFIER = getEngine()
+// determine what engine the browser is using based on the engine id
 const IS_BLINK = ENGINE_IDENTIFIER == 80
 const IS_GECKO = ENGINE_IDENTIFIER == 58
 const IS_WEBKIT = ENGINE_IDENTIFIER == 77
+// engine names and a fallback value if the engine is not recognized
 const JS_ENGINE = ({
 	80: 'V8',
 	58: 'SpiderMonkey',
 	77: 'JavaScriptCore',
 })[ENGINE_IDENTIFIER] || null
 
+// feature detection for brave browser
 const LIKE_BRAVE = IS_BLINK && 'flat' in Array.prototype /* Chrome 69 */ && !('ReportingObserver' in self /* Brave */)
 
+// feature e detection for brave browser with resistance, giving further confidence that the browser is Brave
 // @ts-expect-error
 const LIKE_BRAVE_RESISTANCE = LIKE_BRAVE && navigator?.keyboard === null
 
+// if all of the checks pass the functon returns true, indicating
 function braveBrowser() {
 	const brave = (
+		// check for the presence of `brave` property in the nav object.
 		'brave' in navigator &&
+		// check if the brave property is an instance of the constructor Brave
 		// @ts-ignore
 		Object.getPrototypeOf(navigator.brave).constructor.name == 'Brave' &&
 		// @ts-ignore
@@ -39,7 +64,16 @@ function braveBrowser() {
 	return brave
 }
 
+/**
+ * Retrieves the Brave privacy mode based on the browser's capabilities.
+ * @return {mode} An object representing the Brave privacy mode:
+ * - `unknown`: Indicates if the privacy mode is unknown.
+ * - `allow`: Indicates if the privacy mode is set to allow.
+ * - `standard`: Indicates if the privacy mode is set to standard.
+ * - `strict`: Indicates if the privacy mode is set to strict.
+ */
 function getBraveMode() {
+	// list of possible brave privacy modes
 	const mode = {
 		unknown: false,
 		allow: false,
