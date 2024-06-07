@@ -7,7 +7,6 @@
         "google",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
-
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -18,12 +17,11 @@
         "@typescript-eslint"
     ],
     "rules": {
-      "no-tabs": 0,
-      "indent": 0,
-      "semi": 0,
-      "max-len": 0,
-      "object-curly-spacing": 0,
-      "@typescript-eslint/ban-ts-comment": "off",
-      "require-jsdoc": 0
+        "no-tabs": 0,
+        "indent": 0,
+        "semi": 0,
+        "max-len": 0,
+        "object-curly-spacing": 0,
+        "require-jsdoc": 0
     }
 }

@@ -26,7 +26,6 @@
     "url": "https://github.com/abrahamjuliot/CreepJS/issues"
   },
   "homepage": "https://github.com/abrahamjuliot/CreepJS#readme",
-  "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.3",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
